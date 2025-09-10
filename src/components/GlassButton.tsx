@@ -50,6 +50,14 @@ export const GlassButton: React.FC<GlassButtonProps> = ({
     ${className}
   `.trim();
 
+  // Inline styles as fallback for production backdrop-filter issues
+  const inlineStyles: React.CSSProperties = {
+    position: 'relative',
+    isolation: 'isolate',
+    backdropFilter: 'blur(12px) saturate(180%)',
+    WebkitBackdropFilter: 'blur(12px) saturate(180%)',
+  };
+
   const content = (
     <span className="relative z-10">
       {children}
@@ -58,14 +66,14 @@ export const GlassButton: React.FC<GlassButtonProps> = ({
 
   if (href) {
     return (
-      <a href={href} className={combinedClasses}>
+      <a href={href} className={combinedClasses} style={inlineStyles}>
         {content}
       </a>
     );
   }
 
   return (
-    <button onClick={onClick} className={combinedClasses}>
+    <button onClick={onClick} className={combinedClasses} style={inlineStyles}>
       {content}
     </button>
   );

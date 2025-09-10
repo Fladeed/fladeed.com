@@ -4,6 +4,7 @@
 :root {
   --background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #cbd5e1 100%);
   --foreground: #1e293b;
+  /* Explicit glass variables with fallbacks for production */
   --glass-bg: rgba(255, 255, 255, 0.3);
   --glass-border: rgba(255, 255, 255, 0.4);
   --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
@@ -21,6 +22,7 @@
 :root.dark {
   --background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
   --foreground: #ffffff;
+  /* Dark mode glass variables */
   --glass-bg: rgba(255, 255, 255, 0.08);
   --glass-border: rgba(255, 255, 255, 0.12);
   --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
@@ -34,6 +36,7 @@
 :root.light {
   --background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #cbd5e1 100%);
   --foreground: #1e293b;
+  /* Light mode glass variables */
   --glass-bg: rgba(255, 255, 255, 0.3);
   --glass-border: rgba(255, 255, 255, 0.4);
   --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
@@ -68,40 +71,59 @@ body {
 
 /* Glass morphism utilities */
 .glass {
-  background: var(--glass-bg);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid var(--glass-border);
-  box-shadow: var(--glass-shadow);
+  /* Primary glass background with CSS variable fallback */
+  background: var(--glass-bg, rgba(255, 255, 255, 0.08)) !important;
+  backdrop-filter: blur(20px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+  border: 1px solid var(--glass-border, rgba(255, 255, 255, 0.12)) !important;
+  box-shadow: var(--glass-shadow, 0 8px 32px 0 rgba(31, 38, 135, 0.15)) !important;
   
-  /* iOS Safari fallbacks */
+  /* Additional fallback gradients */
   background-image: linear-gradient(135deg, 
     rgba(255, 255, 255, 0.1) 0%, 
-    rgba(255, 255, 255, 0.05) 100%);
+    rgba(255, 255, 255, 0.05) 100%) !important;
+  
+  /* Force hardware acceleration */
+  will-change: background, border-color, box-shadow;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  
+  /* Production-safe stacking context */
+  isolation: isolate !important;
+  position: relative !important;
+  z-index: 1 !important;
 }
 
-/* Mobile optimizations - reduced blur for better performance */
-@media (max-width: 768px) {
-  .glass {
-    backdrop-filter: blur(8px) saturate(150%);
-    -webkit-backdrop-filter: blur(8px) saturate(150%);
-    /* Stronger background on mobile for better readability */
-    background: rgba(255, 255, 255, 0.12);
-  }
-  
-  .glass-intense {
-    backdrop-filter: blur(12px) saturate(160%);
-    -webkit-backdrop-filter: blur(12px) saturate(160%);
-    /* Even stronger background for navigation */
-    background: rgba(255, 255, 255, 0.18);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-  }
-  
-  .glass-light {
-    backdrop-filter: blur(6px) saturate(140%);
-    -webkit-backdrop-filter: blur(6px) saturate(140%);
-    background: rgba(255, 255, 255, 0.08);
-  }
+
+
+/* Production-safe backdrop-filter for all devices */
+.glass,
+.glass-intense,
+.glass-light {
+  /* Create stacking context for backdrop-filter to work properly */
+  isolation: isolate !important;
+  /* Ensure proper layering */
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+/* Glass intense variant for navigation */
+.glass-intense {
+  background: rgba(255, 255, 255, 0.15) !important;
+  backdrop-filter: blur(20px) saturate(200%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(200%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.25) !important;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.2) !important;
+  z-index: 50 !important;
+}
+
+/* Glass light variant */
+.glass-light {
+  background: rgba(255, 255, 255, 0.08) !important;
+  backdrop-filter: blur(8px) saturate(150%) !important;
+  -webkit-backdrop-filter: blur(8px) saturate(150%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  box-shadow: 0 4px 16px 0 rgba(31, 38, 135, 0.1) !important;
 }
 
 /* Fallback for browsers without backdrop-filter support */
@@ -142,14 +164,13 @@ body {
 /* Mobile light mode optimizations */
 @media (max-width: 768px) {
   :root.light .glass {
-    background: rgba(255, 255, 255, 0.6);
-    border: 1px solid rgba(255, 255, 255, 0.7);
+    background: rgba(255, 255, 255, 0.5) !important;
+    border: 1px solid rgba(255, 255, 255, 0.6) !important;
   }
   
   :root.light .glass-intense {
-    background: rgba(255, 255, 255, 0.75);
-    border: 1px solid rgba(255, 255, 255, 0.8);
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.12);
+    background: rgba(255, 255, 255, 0.6) !important;
+    border: 1px solid rgba(255, 255, 255, 0.7) !important;
   }
 }
 
@@ -169,61 +190,18 @@ body {
   
   @media (max-width: 768px) {
     :root:not(.dark) .glass {
-      background: rgba(255, 255, 255, 0.6);
-      border: 1px solid rgba(255, 255, 255, 0.7);
+      background: rgba(255, 255, 255, 0.5) !important;
+      border: 1px solid rgba(255, 255, 255, 0.6) !important;
     }
     
     :root:not(.dark) .glass-intense {
-      background: rgba(255, 255, 255, 0.75);
-      border: 1px solid rgba(255, 255, 255, 0.8);
-      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.12);
+      background: rgba(255, 255, 255, 0.6) !important;
+      border: 1px solid rgba(255, 255, 255, 0.7) !important;
     }
   }
 }
 
-.glass-intense {
-  background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(30px) saturate(200%);
-  -webkit-backdrop-filter: blur(30px) saturate(200%);
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.4);
-  
-  /* iOS Safari fallback */
-  background-image: linear-gradient(135deg, 
-    rgba(255, 255, 255, 0.2) 0%, 
-    rgba(255, 255, 255, 0.1) 100%);
-}
 
-@supports not (backdrop-filter: blur(30px)) {
-  .glass-intense {
-    background: rgba(255, 255, 255, 0.22);
-    background-image: linear-gradient(135deg, 
-      rgba(255, 255, 255, 0.28) 0%, 
-      rgba(255, 255, 255, 0.18) 100%);
-  }
-}
-
-.glass-light {
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(10px) saturate(150%);
-  -webkit-backdrop-filter: blur(10px) saturate(150%);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 4px 20px 0 rgba(31, 38, 135, 0.2);
-  
-  /* iOS Safari fallback */
-  background-image: linear-gradient(135deg, 
-    rgba(255, 255, 255, 0.08) 0%, 
-    rgba(255, 255, 255, 0.03) 100%);
-}
-
-@supports not (backdrop-filter: blur(10px)) {
-  .glass-light {
-    background: rgba(255, 255, 255, 0.1);
-    background-image: linear-gradient(135deg, 
-      rgba(255, 255, 255, 0.12) 0%, 
-      rgba(255, 255, 255, 0.08) 100%);
-  }
-}
 
 .glass-hover {
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -474,25 +452,4 @@ body {
   }
 }
 
-/* Additional iOS iPhone 11 specific improvements */
-@media screen and (device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) {
-  /* iPhone 11 specific optimizations */
-  .glass,
-  .glass-intense,
-  .glass-light {
-    /* Enhanced visibility on iPhone 11 */
-    border-width: 1.5px;
-  }
-  
-  .glass {
-    background: rgba(255, 255, 255, 0.15);
-  }
-  
-  .glass-intense {
-    background: rgba(255, 255, 255, 0.2);
-  }
-  
-  .glass-light {
-    background: rgba(255, 255, 255, 0.1);
-  }
-}
+
