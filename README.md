@@ -19,7 +19,7 @@ A stunning landing page for Fladeed development agency featuring fluid glass mor
 - **Styling**: Tailwind CSS with custom glass morphism utilities
 - **Font**: Inter (Google Fonts)
 - **Build Tool**: Turbopack
-- **Deployment**: Vercel-ready
+- **Deployment**: GitHub Pages ready with automatic CI/CD
 
 ## 🚀 Getting Started
 
@@ -136,15 +136,38 @@ The design is mobile-first and includes breakpoints for:
 
 ## 🚀 Deployment
 
-### Vercel (Recommended)
+### GitHub Pages (Automatic)
+
+This project is configured for automatic deployment to GitHub Pages:
+
+1. **Push to GitHub**: Push your code to the `main` branch
+2. **Enable GitHub Pages**: 
+   - Go to your repository settings
+   - Navigate to "Pages" section
+   - Source: "GitHub Actions"
+3. **Automatic Deploy**: The GitHub Actions workflow will automatically build and deploy your site
+
+The workflow will:
+- Build the Next.js app as a static export
+- Deploy to GitHub Pages
+- Your site will be available at: `https://yourusername.github.io/repository-name`
+
+### Vercel (Alternative)
 
 1. Push your code to GitHub
 2. Connect your repository to Vercel
 3. Deploy with automatic builds
 
+### Manual Build for GitHub Pages
+
+```bash
+npm run build        # Creates static export in 'dist' folder
+# Upload the 'dist' folder contents to GitHub Pages
+```
+
 ### Other Platforms
 
-The project works with any platform that supports Next.js:
+The project works with any platform that supports static sites:
 
 - Netlify
 - Railway
