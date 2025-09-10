@@ -55,14 +55,14 @@ export const PortfolioSection: React.FC = () => {
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-16">
           <GlassCard variant="light" className="inline-block mb-6">
-            <span className="text-blue-300 font-medium text-sm">Our Work</span>
+            <span className="text-adaptive-accent font-medium text-sm">Our Work</span>
           </GlassCard>
           
           <h2 className="text-4xl md:text-5xl font-bold mb-6">
             Featured <span className="gradient-text">Projects</span>
           </h2>
           
-          <p className="text-xl text-white/80 max-w-3xl mx-auto">
+          <p className="text-xl text-adaptive-muted max-w-3xl mx-auto">
             Discover our latest projects showcasing cutting-edge technology and beautiful design principles.
           </p>
         </div>
@@ -79,19 +79,19 @@ export const PortfolioSection: React.FC = () => {
                 <div className="text-6xl mb-4 group-hover:scale-110 transition-transform duration-300">
                   {project.image}
                 </div>
-                <div className="text-xs text-blue-300 font-medium mb-2 uppercase tracking-wider">
+                <div className="text-xs text-adaptive-accent font-medium mb-2 uppercase tracking-wider">
                   {project.category}
                 </div>
               </div>
               
-              <h3 className="text-xl font-bold text-white mb-3">{project.title}</h3>
-              <p className="text-white/80 mb-4 leading-relaxed text-sm">{project.description}</p>
+              <h3 className="text-xl font-bold text-adaptive mb-3">{project.title}</h3>
+              <p className="text-adaptive-muted mb-4 leading-relaxed text-sm">{project.description}</p>
               
               <div className="flex flex-wrap gap-2 mb-4">
                 {project.tech.map((tech, techIndex) => (
                   <span 
                     key={techIndex} 
-                    className="text-xs bg-white/10 text-white/70 px-2 py-1 rounded-lg"
+                    className="text-xs bg-white/10 text-adaptive-muted px-2 py-1 rounded-lg"
                   >
                     {tech}
                   </span>

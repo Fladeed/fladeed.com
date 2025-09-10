@@ -1,22 +1,60 @@
 @import "tailwindcss";
 
+/* Light and Dark mode CSS variables */
 :root {
-  --background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  --foreground: #ffffff;
-  --glass-bg: rgba(255, 255, 255, 0.1);
-  --glass-border: rgba(255, 255, 255, 0.18);
-  --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  --background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #cbd5e1 100%);
+  --foreground: #1e293b;
+  --glass-bg: rgba(255, 255, 255, 0.3);
+  --glass-border: rgba(255, 255, 255, 0.4);
+  --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
   --accent-primary: #667eea;
   --accent-secondary: #764ba2;
+  
+  /* Text colors for light mode */
+  --text-primary: 15 23 42; /* slate-900 */
+  --text-secondary: 71 85 105; /* slate-600 */
+  
+  color-scheme: light dark;
 }
 
+/* Dark theme */
+:root.dark {
+  --background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
+  --foreground: #ffffff;
+  --glass-bg: rgba(255, 255, 255, 0.08);
+  --glass-border: rgba(255, 255, 255, 0.12);
+  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+  
+  /* Text colors for dark mode */
+  --text-primary: 248 250 252; /* slate-50 */
+  --text-secondary: 203 213 225; /* slate-300 */
+}
+
+/* Light theme (explicit) */
+:root.light {
+  --background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #cbd5e1 100%);
+  --foreground: #1e293b;
+  --glass-bg: rgba(255, 255, 255, 0.3);
+  --glass-border: rgba(255, 255, 255, 0.4);
+  --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+  
+  /* Text colors for light mode */
+  --text-primary: 15 23 42; /* slate-900 */
+  --text-secondary: 71 85 105; /* slate-600 */
+}
+
+/* Fallback for system preference */
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not(.light):not(.dark) {
     --background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
     --foreground: #ffffff;
-    --glass-bg: rgba(255, 255, 255, 0.05);
-    --glass-border: rgba(255, 255, 255, 0.1);
-    --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    --glass-bg: rgba(255, 255, 255, 0.08);
+    --glass-border: rgba(255, 255, 255, 0.12);
+    --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+    
+    /* Text colors for dark mode */
+    --text-primary: 248 250 252; /* slate-50 */
+    --text-secondary: 203 213 225; /* slate-300 */
   }
 }
 
@@ -35,6 +73,51 @@ body {
   -webkit-backdrop-filter: blur(20px) saturate(180%);
   border: 1px solid var(--glass-border);
   box-shadow: var(--glass-shadow);
+  
+  /* iOS Safari fallbacks */
+  background-image: linear-gradient(135deg, 
+    rgba(255, 255, 255, 0.1) 0%, 
+    rgba(255, 255, 255, 0.05) 100%);
+}
+
+/* Fallback for browsers without backdrop-filter support */
+@supports not (backdrop-filter: blur(20px)) {
+  .glass {
+    background: rgba(255, 255, 255, 0.15);
+    background-image: linear-gradient(135deg, 
+      rgba(255, 255, 255, 0.2) 0%, 
+      rgba(255, 255, 255, 0.1) 100%);
+  }
+}
+
+/* Light mode glass adjustments */
+@media (prefers-color-scheme: light) {
+  .glass {
+    background: rgba(255, 255, 255, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
+    color: var(--foreground);
+  }
+  
+  .glass-intense {
+    background: rgba(255, 255, 255, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.15);
+    color: var(--foreground);
+  }
+  
+  .glass-light {
+    background: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.08);
+    color: var(--foreground);
+  }
+  
+  .glass-hover:hover {
+    background: rgba(255, 255, 255, 0.6);
+    border-color: rgba(255, 255, 255, 0.7);
+    box-shadow: 0 16px 48px 0 rgba(0, 0, 0, 0.2);
+  }
 }
 
 .glass-intense {
@@ -43,6 +126,20 @@ body {
   -webkit-backdrop-filter: blur(30px) saturate(200%);
   border: 1px solid rgba(255, 255, 255, 0.25);
   box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.4);
+  
+  /* iOS Safari fallback */
+  background-image: linear-gradient(135deg, 
+    rgba(255, 255, 255, 0.2) 0%, 
+    rgba(255, 255, 255, 0.1) 100%);
+}
+
+@supports not (backdrop-filter: blur(30px)) {
+  .glass-intense {
+    background: rgba(255, 255, 255, 0.2);
+    background-image: linear-gradient(135deg, 
+      rgba(255, 255, 255, 0.25) 0%, 
+      rgba(255, 255, 255, 0.15) 100%);
+  }
 }
 
 .glass-light {
@@ -51,38 +148,79 @@ body {
   -webkit-backdrop-filter: blur(10px) saturate(150%);
   border: 1px solid rgba(255, 255, 255, 0.1);
   box-shadow: 0 4px 20px 0 rgba(31, 38, 135, 0.2);
+  
+  /* iOS Safari fallback */
+  background-image: linear-gradient(135deg, 
+    rgba(255, 255, 255, 0.08) 0%, 
+    rgba(255, 255, 255, 0.03) 100%);
+}
+
+@supports not (backdrop-filter: blur(10px)) {
+  .glass-light {
+    background: rgba(255, 255, 255, 0.1);
+    background-image: linear-gradient(135deg, 
+      rgba(255, 255, 255, 0.12) 0%, 
+      rgba(255, 255, 255, 0.08) 100%);
+  }
 }
 
 .glass-hover {
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  /* iOS Safari performance optimization */
+  will-change: transform, background, border-color, box-shadow;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
 }
 
-.glass-hover:hover {
-  background: rgba(255, 255, 255, 0.2);
-  border-color: rgba(255, 255, 255, 0.3);
-  transform: translateY(-2px);
-  box-shadow: 0 16px 48px 0 rgba(31, 38, 135, 0.5);
+/* iOS touch improvements */
+@media (hover: none) and (pointer: coarse) {
+  .glass-hover:active {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.3);
+    transform: translateY(-1px);
+    box-shadow: 0 12px 36px 0 rgba(31, 38, 135, 0.4);
+  }
 }
 
-/* Floating animation */
+@media (hover: hover) and (pointer: fine) {
+  .glass-hover:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+    box-shadow: 0 16px 48px 0 rgba(31, 38, 135, 0.5);
+  }
+}
+
+/* Improved floating animation for iOS */
 @keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
+  0%, 100% { 
+    transform: translateY(0px) translateZ(0);
+  }
+  50% { 
+    transform: translateY(-10px) translateZ(0);
+  }
 }
 
 .float {
   animation: float 6s ease-in-out infinite;
+  /* iOS performance optimization */
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  will-change: transform;
 }
 
-/* Shimmer effect */
+/* Improved shimmer effect for iOS */
 @keyframes shimmer {
-  0% { transform: translateX(-100%); }
-  100% { transform: translateX(100%); }
+  0% { transform: translateX(-100%) translateZ(0); }
+  100% { transform: translateX(100%) translateZ(0); }
 }
 
 .shimmer {
   position: relative;
   overflow: hidden;
+  /* iOS performance optimization */
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
 }
 
 .shimmer::before {
@@ -98,39 +236,129 @@ body {
     rgba(255, 255, 255, 0.2),
     transparent
   );
-  transform: translateX(-100%);
+  transform: translateX(-100%) translateZ(0);
   animation: shimmer 2s infinite;
+  /* iOS performance optimization */
+  will-change: transform;
 }
 
-/* Pulse glow */
+/* Improved pulse glow for iOS */
 @keyframes pulse-glow {
   0%, 100% { 
     box-shadow: 0 0 20px rgba(102, 126, 234, 0.5);
+    transform: translateZ(0);
   }
   50% { 
     box-shadow: 0 0 40px rgba(102, 126, 234, 0.8), 0 0 60px rgba(118, 75, 162, 0.4);
+    transform: translateZ(0);
   }
 }
 
 .pulse-glow {
   animation: pulse-glow 3s ease-in-out infinite;
+  /* iOS performance optimization */
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  will-change: box-shadow;
 }
 
-/* Gradient text */
+/* Improved gradient text for iOS */
 .gradient-text {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  /* iOS Safari fallback */
+  color: #667eea;
 }
 
-/* Particle background */
+/* Ensure gradient text works on iOS */
+@supports not (-webkit-background-clip: text) {
+  .gradient-text {
+    color: #667eea;
+  }
+}
+
+/* Light mode gradient text */
+@media (prefers-color-scheme: light) {
+  .gradient-text {
+    background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: #4f46e5; /* fallback */
+  }
+  
+  @supports not (-webkit-background-clip: text) {
+    .gradient-text {
+      color: #4f46e5;
+    }
+  }
+}
+
+/* Adaptive text colors for light/dark mode */
+.text-adaptive {
+  color: rgb(var(--text-primary));
+}
+
+.text-adaptive-muted {
+  color: rgb(var(--text-secondary));
+}
+
+/* Adaptive border colors */
+.border-adaptive {
+  border-color: rgb(var(--text-primary) / 0.3);
+}
+
+.border-adaptive-muted {
+  border-color: rgb(var(--text-secondary) / 0.3);
+}
+
+/* Adaptive accent colors - blue tones that work in both themes */
+.text-adaptive-accent {
+  color: rgb(59 130 246); /* blue-500 - good contrast in light mode */
+}
+
+.text-adaptive-accent-light {
+  color: rgb(37 99 235); /* blue-600 for light mode */
+}
+
+/* Dark theme adjustments for accent colors */
+:root.dark .text-adaptive-accent {
+  color: rgb(96 165 250); /* blue-400 for dark mode */
+}
+
+:root.dark .text-adaptive-accent-light {
+  color: rgb(147 197 253); /* blue-300 for dark mode */
+}
+
+/* System dark mode fallback */
+@media (prefers-color-scheme: dark) {
+  :root:not(.light):not(.dark) .text-adaptive-accent {
+    color: rgb(96 165 250); /* blue-400 for dark mode */
+  }
+  
+  :root:not(.light):not(.dark) .text-adaptive-accent-light {
+    color: rgb(147 197 253); /* blue-300 for dark mode */
+  }
+}
+
+/* Placeholder colors for form inputs */
+.placeholder-adaptive-muted::placeholder {
+  color: rgb(var(--text-secondary));
+  opacity: 0.6;
+}
+
+/* Improved particle background for iOS */
 .particles {
   position: absolute;
   width: 100%;
   height: 100%;
   overflow: hidden;
   pointer-events: none;
+  /* iOS performance optimization */
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
 }
 
 .particle {
@@ -138,11 +366,16 @@ body {
   background: rgba(255, 255, 255, 0.1);
   border-radius: 50%;
   animation: particle-float 8s linear infinite;
+  /* iOS performance optimization */
+  will-change: transform, opacity;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
 }
 
+/* Improved particle animation for iOS */
 @keyframes particle-float {
   0% {
-    transform: translateY(100vh) rotate(0deg);
+    transform: translateY(100vh) rotate(0deg) translateZ(0);
     opacity: 0;
   }
   10% {
@@ -152,7 +385,53 @@ body {
     opacity: 1;
   }
   100% {
-    transform: translateY(-100px) rotate(360deg);
+    transform: translateY(-100px) rotate(360deg) translateZ(0);
     opacity: 0;
+  }
+}
+
+/* iOS Safari specific viewport fixes */
+@supports (-webkit-touch-callout: none) {
+  body {
+    /* Fix for iOS Safari viewport issues */
+    min-height: -webkit-fill-available;
+  }
+  
+  /* Improve touch responsiveness */
+  button, 
+  .glass-hover,
+  [role="button"] {
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+  }
+  
+  /* Prevent zoom on input focus */
+  input, 
+  textarea, 
+  select {
+    font-size: 16px;
+  }
+}
+
+/* Additional iOS iPhone 11 specific improvements */
+@media screen and (device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) {
+  /* iPhone 11 specific optimizations */
+  .glass,
+  .glass-intense,
+  .glass-light {
+    /* Enhanced visibility on iPhone 11 */
+    border-width: 1.5px;
+  }
+  
+  .glass {
+    background: rgba(255, 255, 255, 0.15);
+  }
+  
+  .glass-intense {
+    background: rgba(255, 255, 255, 0.2);
+  }
+  
+  .glass-light {
+    background: rgba(255, 255, 255, 0.1);
   }
 }

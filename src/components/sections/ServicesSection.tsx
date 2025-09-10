@@ -48,14 +48,14 @@ export const ServicesSection: React.FC = () => {
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-16">
           <GlassCard variant="light" className="inline-block mb-6">
-            <span className="text-blue-300 font-medium text-sm">Our Expertise</span>
+            <span className="text-adaptive-accent font-medium text-sm">Our Expertise</span>
           </GlassCard>
           
           <h2 className="text-4xl md:text-5xl font-bold mb-6">
             <span className="gradient-text">Services</span> We Offer
           </h2>
           
-          <p className="text-xl text-white/80 max-w-3xl mx-auto">
+          <p className="text-xl text-adaptive-muted max-w-3xl mx-auto">
             We provide comprehensive development services to bring your digital vision to life with exceptional quality and performance.
           </p>
         </div>
@@ -70,14 +70,14 @@ export const ServicesSection: React.FC = () => {
               animated={index % 2 === 0}
             >
               <div className="text-4xl mb-4">{service.icon}</div>
-              <h3 className="text-xl font-bold text-white mb-3">{service.title}</h3>
-              <p className="text-white/80 mb-4 leading-relaxed">{service.description}</p>
+              <h3 className="text-xl font-bold text-adaptive mb-3">{service.title}</h3>
+              <p className="text-adaptive-muted mb-4 leading-relaxed">{service.description}</p>
               
               <div className="space-y-2">
                 {service.features.map((feature, featureIndex) => (
                   <div key={featureIndex} className="flex items-center space-x-2">
                     <div className="w-1.5 h-1.5 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full"></div>
-                    <span className="text-white/70 text-sm">{feature}</span>
+                    <span className="text-adaptive-muted text-sm">{feature}</span>
                   </div>
                 ))}
               </div>

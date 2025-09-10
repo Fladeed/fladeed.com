@@ -32,9 +32,9 @@ export const GlassButton: React.FC<GlassButtonProps> = ({
   };
   
   const variantClasses = {
-    primary: 'bg-gradient-to-r from-blue-500/20 to-purple-500/20 text-white',
-    secondary: 'bg-white/10 text-white',
-    ghost: 'bg-transparent text-white border border-white/20',
+    primary: 'bg-gradient-to-r from-blue-500/20 to-purple-500/20 text-adaptive font-semibold',
+    secondary: 'bg-white/10 text-adaptive',
+    ghost: 'bg-transparent text-adaptive border border-adaptive-muted',
   };
   
   const effectClasses = `

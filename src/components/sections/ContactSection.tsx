@@ -51,14 +51,14 @@ export const ContactSection: React.FC = () => {
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-16">
           <GlassCard variant="light" className="inline-block mb-6">
-            <span className="text-blue-300 font-medium text-sm">Get In Touch</span>
+            <span className="text-adaptive-accent font-medium text-sm">Get In Touch</span>
           </GlassCard>
           
           <h2 className="text-4xl md:text-5xl font-bold mb-6">
             Let&apos;s Build Something <span className="gradient-text">Amazing</span>
           </h2>
           
-          <p className="text-xl text-white/80 max-w-3xl mx-auto">
+          <p className="text-xl text-adaptive-muted max-w-3xl mx-auto">
             Ready to transform your ideas into reality? We&apos;d love to hear about your project 
             and discuss how we can help bring your vision to life.
           </p>
@@ -67,12 +67,12 @@ export const ContactSection: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Contact Form */}
           <GlassCard variant="default" className="h-fit">
-            <h3 className="text-2xl font-bold text-white mb-6">Send us a message</h3>
+            <h3 className="text-2xl font-bold text-adaptive mb-6">Send us a message</h3>
             
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-white/80 text-sm font-medium mb-2">
+                  <label className="block text-adaptive-muted text-sm font-medium mb-2">
                     Name *
                   </label>
                   <input
@@ -81,12 +81,12 @@ export const ContactSection: React.FC = () => {
                     value={formData.name}
                     onChange={handleChange}
                     required
-                    className="w-full glass rounded-lg px-4 py-3 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-blue-400/50 transition-all duration-300"
+                    className="w-full glass rounded-lg px-4 py-3 text-adaptive placeholder-adaptive-muted focus:outline-none focus:ring-2 focus:ring-blue-400/50 transition-all duration-300"
                     placeholder="Your Name"
                   />
                 </div>
                 <div>
-                  <label className="block text-white/80 text-sm font-medium mb-2">
+                  <label className="block text-adaptive-muted text-sm font-medium mb-2">
                     Email *
                   </label>
                   <input
@@ -95,14 +95,14 @@ export const ContactSection: React.FC = () => {
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    className="w-full glass rounded-lg px-4 py-3 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-blue-400/50 transition-all duration-300"
+                    className="w-full glass rounded-lg px-4 py-3 text-adaptive placeholder-adaptive-muted focus:outline-none focus:ring-2 focus:ring-blue-400/50 transition-all duration-300"
                     placeholder="your.email@example.com"
                   />
                 </div>
               </div>
               
               <div>
-                <label className="block text-white/80 text-sm font-medium mb-2">
+                <label className="block text-adaptive-muted text-sm font-medium mb-2">
                   Company
                 </label>
                 <input
@@ -110,13 +110,13 @@ export const ContactSection: React.FC = () => {
                   name="company"
                   value={formData.company}
                   onChange={handleChange}
-                  className="w-full glass rounded-lg px-4 py-3 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-blue-400/50 transition-all duration-300"
+                  className="w-full glass rounded-lg px-4 py-3 text-adaptive placeholder-adaptive-muted focus:outline-none focus:ring-2 focus:ring-blue-400/50 transition-all duration-300"
                   placeholder="Your Company (Optional)"
                 />
               </div>
               
               <div>
-                <label className="block text-white/80 text-sm font-medium mb-2">
+                <label className="block text-adaptive-muted text-sm font-medium mb-2">
                   Message *
                 </label>
                 <textarea
@@ -125,7 +125,7 @@ export const ContactSection: React.FC = () => {
                   onChange={handleChange}
                   required
                   rows={5}
-                  className="w-full glass rounded-lg px-4 py-3 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-blue-400/50 transition-all duration-300 resize-none"
+                  className="w-full glass rounded-lg px-4 py-3 text-adaptive placeholder-adaptive-muted focus:outline-none focus:ring-2 focus:ring-blue-400/50 transition-all duration-300 resize-none"
                   placeholder="Tell us about your project..."
                 />
               </div>
@@ -144,8 +144,8 @@ export const ContactSection: React.FC = () => {
           {/* Contact Info */}
           <div className="space-y-6">
             <GlassCard variant="default" animated>
-              <h3 className="text-2xl font-bold text-white mb-6">Get in touch</h3>
-              <p className="text-white/80 leading-relaxed mb-6">
+              <h3 className="text-2xl font-bold text-adaptive mb-6">Get in touch</h3>
+              <p className="text-adaptive-muted leading-relaxed mb-6">
                 We&apos;re here to help you create something extraordinary. Whether you have a specific 
                 project in mind or just want to explore possibilities, we&apos;d love to chat.
               </p>
@@ -159,8 +159,8 @@ export const ContactSection: React.FC = () => {
                   >
                     <div className="text-2xl">{info.icon}</div>
                     <div>
-                      <div className="text-white/60 text-sm">{info.title}</div>
-                      <div className="text-white font-medium group-hover:text-blue-300 transition-colors">
+                      <div className="text-adaptive-muted text-sm">{info.title}</div>
+                      <div className="text-adaptive font-medium group-hover:text-adaptive-accent transition-colors">
                         {info.value}
                       </div>
                     </div>
@@ -170,23 +170,23 @@ export const ContactSection: React.FC = () => {
             </GlassCard>
 
             <GlassCard variant="light">
-              <h4 className="text-lg font-bold text-white mb-4">Why Choose Fladeed?</h4>
+              <h4 className="text-lg font-bold text-adaptive mb-4">Why Choose Fladeed?</h4>
               <div className="space-y-3">
                 <div className="flex items-center space-x-3">
                   <div className="w-2 h-2 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full"></div>
-                  <span className="text-white/80 text-sm">Quick response within 24 hours</span>
+                  <span className="text-adaptive-muted text-sm">Quick response within 24 hours</span>
                 </div>
                 <div className="flex items-center space-x-3">
                   <div className="w-2 h-2 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full"></div>
-                  <span className="text-white/80 text-sm">Free consultation and project estimation</span>
+                  <span className="text-adaptive-muted text-sm">Free consultation and project estimation</span>
                 </div>
                 <div className="flex items-center space-x-3">
                   <div className="w-2 h-2 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full"></div>
-                  <span className="text-white/80 text-sm">Transparent communication throughout</span>
+                  <span className="text-adaptive-muted text-sm">Transparent communication throughout</span>
                 </div>
                 <div className="flex items-center space-x-3">
                   <div className="w-2 h-2 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full"></div>
-                  <span className="text-white/80 text-sm">Ongoing support and maintenance</span>
+                  <span className="text-adaptive-muted text-sm">Ongoing support and maintenance</span>
                 </div>
               </div>
             </GlassCard>

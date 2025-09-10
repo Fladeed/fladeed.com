@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import Image from 'next/image';
 import { GlassCard } from './GlassCard';
 
 export const Footer: React.FC = () => {
@@ -42,12 +43,18 @@ export const Footer: React.FC = () => {
             {/* Brand */}
             <div className="lg:col-span-2">
               <div className="flex items-center space-x-2 mb-4">
-                <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
-                  <span className="text-white font-bold text-lg">F</span>
+                <div className="w-8 h-8 relative">
+                  <Image
+                    src="/logo-simple.svg"
+                    alt="Fladeed logo"
+                    width={32}
+                    height={32}
+                    className="object-contain"
+                  />
                 </div>
-                <span className="text-white font-bold text-xl gradient-text">Fladeed</span>
+                <span className="text-adaptive font-bold text-xl">Fladeed</span>
               </div>
-              <p className="text-white/70 leading-relaxed mb-6 max-w-md">
+              <p className="text-adaptive-muted leading-relaxed mb-6 max-w-md">
                 Crafting exceptional digital experiences with cutting-edge technology and modern design. 
                 Transform your ideas into stunning, performance-driven applications.
               </p>
@@ -70,13 +77,13 @@ export const Footer: React.FC = () => {
             {/* Links */}
             {Object.entries(footerLinks).map(([category, links]) => (
               <div key={category}>
-                <h4 className="text-white font-semibold mb-4">{category}</h4>
+                <h4 className="text-adaptive font-semibold mb-4">{category}</h4>
                 <ul className="space-y-3">
                   {links.map((link, index) => (
                     <li key={index}>
                       <a
                         href="#"
-                        className="text-white/70 hover:text-white transition-colors duration-300 text-sm"
+                        className="text-adaptive-muted hover:text-adaptive transition-colors duration-300 text-sm"
                       >
                         {link}
                       </a>
@@ -89,18 +96,18 @@ export const Footer: React.FC = () => {
 
           {/* Bottom Bar */}
           <div className="border-t border-white/10 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
-            <p className="text-white/60 text-sm mb-4 md:mb-0">
+            <p className="text-adaptive-muted text-sm mb-4 md:mb-0">
               © {currentYear} Fladeed. All rights reserved.
             </p>
             
             <div className="flex items-center space-x-6 text-sm">
-              <a href="#" className="text-white/60 hover:text-white transition-colors">
+              <a href="#" className="text-adaptive-muted hover:text-adaptive transition-colors">
                 Privacy Policy
               </a>
-              <a href="#" className="text-white/60 hover:text-white transition-colors">
+              <a href="#" className="text-adaptive-muted hover:text-adaptive transition-colors">
                 Terms of Service
               </a>
-              <a href="#" className="text-white/60 hover:text-white transition-colors">
+              <a href="#" className="text-adaptive-muted hover:text-adaptive transition-colors">
                 Cookie Policy
               </a>
             </div>

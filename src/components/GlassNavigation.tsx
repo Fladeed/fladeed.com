@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import { GlassCard } from './GlassCard';
 import { GlassButton } from './GlassButton';
+import { ThemeToggle } from './ThemeToggle';
 
 export const GlassNavigation: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -31,7 +32,7 @@ export const GlassNavigation: React.FC = () => {
                 className="object-contain"
               />
             </div>
-            <span className="text-white font-bold text-xl gradient-text">Fladeed</span>
+            <span className="text-adaptive font-bold text-xl">Fladeed</span>
           </div>
 
           {/* Desktop Navigation */}
@@ -40,7 +41,7 @@ export const GlassNavigation: React.FC = () => {
               <a
                 key={item.label}
                 href={item.href}
-                className="text-white/80 hover:text-white transition-colors duration-300 font-medium"
+                className="text-adaptive-muted hover:text-adaptive transition-colors duration-300 font-medium"
               >
                 {item.label}
               </a>
@@ -48,7 +49,8 @@ export const GlassNavigation: React.FC = () => {
           </div>
 
           {/* CTA Button */}
-          <div className="hidden md:block">
+          <div className="hidden md:flex items-center space-x-3">
+            <ThemeToggle />
             <GlassButton variant="primary" shimmer>
               Get Started
             </GlassButton>
@@ -56,7 +58,7 @@ export const GlassNavigation: React.FC = () => {
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden text-white p-2"
+            className="md:hidden text-adaptive p-2"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
             <svg
@@ -85,15 +87,18 @@ export const GlassNavigation: React.FC = () => {
                 <a
                   key={item.label}
                   href={item.href}
-                  className="text-white/80 hover:text-white transition-colors duration-300 font-medium"
+                  className="text-adaptive-muted hover:text-adaptive transition-colors duration-300 font-medium"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   {item.label}
                 </a>
               ))}
-              <GlassButton variant="primary" shimmer className="w-full">
-                Get Started
-              </GlassButton>
+              <div className="flex items-center space-x-3 pt-2">
+                <ThemeToggle />
+                <GlassButton variant="primary" shimmer className="flex-1">
+                  Get Started
+                </GlassButton>
+              </div>
             </div>
           </div>
         )}
