@@ -12,23 +12,23 @@ This project is a Next.js landing page for Fladeed development agency featuring 
 - ✅ Successfully compiled and tested
 - ✅ Development server running at http://localhost:3000
 - ✅ Comprehensive documentation provided
-- ✅ GitHub Pages deployment configured with automatic CI/CD
+- ✅ Vercel deployment optimized with configuration
 
 ## 🚀 Quick Start
 
 ```bash
-npm run dev    # Start development server
-npm run build  # Build for production (static export)
-npm run start  # Start production server
+npm run dev      # Start development server
+npm run build    # Build for production
+npm run preview  # Preview production build
 ```
 
-## 📦 GitHub Pages Deployment
+## 📦 Vercel Deployment
 
-The project is configured for automatic deployment to GitHub Pages:
+The project is optimized for Vercel deployment:
 
-1. Push to `main` branch
-2. GitHub Actions automatically builds and deploys
-3. Site available at: `https://yourusername.github.io/repository-name`
+1. Push to GitHub (private repos supported)
+2. Import project in Vercel dashboard
+3. Automatic deployment with global CDN
 
 ## 🎨 Glass Components Available
 
@@ -43,6 +43,7 @@ The project is configured for automatic deployment to GitHub Pages:
 - `src/app/layout.tsx` - Root layout with metadata
 - `src/app/globals.css` - Glass morphism utilities
 - `src/components/` - Reusable components
-- `.github/workflows/deploy.yml` - GitHub Pages deployment
-- `next.config.ts` - Static export configuration
+- `vercel.json` - Vercel deployment configuration
+- `next.config.ts` - Next.js configuration
+- `DEPLOYMENT.md` - Comprehensive deployment guide
 - `README.md` - Full documentation

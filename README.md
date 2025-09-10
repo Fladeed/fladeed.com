@@ -18,8 +18,8 @@ A stunning landing page for Fladeed development agency featuring fluid glass mor
 - **Language**: TypeScript
 - **Styling**: Tailwind CSS with custom glass morphism utilities
 - **Font**: Inter (Google Fonts)
-- **Build Tool**: Turbopack
-- **Deployment**: GitHub Pages ready with automatic CI/CD
+- **Build Tool**: Next.js optimized build system
+- **Deployment**: Vercel optimized (also supports GitHub Pages)
 
 ## 🚀 Getting Started
 
@@ -136,33 +136,37 @@ The design is mobile-first and includes breakpoints for:
 
 ## 🚀 Deployment
 
-### GitHub Pages (Automatic)
+### Vercel (Recommended)
 
-This project is configured for automatic deployment to GitHub Pages:
+Perfect for private repositories with zero configuration:
+
+1. **Connect Repository**: 
+   - Go to [vercel.com](https://vercel.com)
+   - Click "New Project" and import your GitHub repo
+2. **Auto-Deploy**: Vercel automatically detects Next.js and deploys
+3. **Live URL**: Get instant production URL + preview deployments for PRs
+
+**Why Vercel?**
+- ✅ Free for private repos
+- ⚡ Next.js optimized (made by Next.js team)
+- 🌍 Global CDN with 100+ edge locations
+- 📊 Built-in analytics and performance monitoring
+
+### GitHub Pages (Public repos only)
+
+For public repositories, GitHub Pages deployment is available:
 
 1. **Push to GitHub**: Push your code to the `main` branch
 2. **Enable GitHub Pages**: 
-   - Go to your repository settings
-   - Navigate to "Pages" section
+   - Go to repository settings → Pages
    - Source: "GitHub Actions"
-3. **Automatic Deploy**: The GitHub Actions workflow will automatically build and deploy your site
+3. **Automatic Deploy**: Workflow builds and deploys static site
 
-The workflow will:
-- Build the Next.js app as a static export
-- Deploy to GitHub Pages
-- Your site will be available at: `https://yourusername.github.io/repository-name`
-
-### Vercel (Alternative)
-
-1. Push your code to GitHub
-2. Connect your repository to Vercel
-3. Deploy with automatic builds
-
-### Manual Build for GitHub Pages
+### Manual Build
 
 ```bash
-npm run build        # Creates static export in 'dist' folder
-# Upload the 'dist' folder contents to GitHub Pages
+npm run build        # Creates optimized production build
+npm run preview      # Preview production build locally
 ```
 
 ### Other Platforms

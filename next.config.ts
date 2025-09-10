@@ -1,12 +1,9 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  output: 'export',
-  trailingSlash: true,
-  skipTrailingSlashRedirect: true,
-  distDir: 'dist',
+  // Optimized for Vercel deployment
   images: {
-    unoptimized: true
+    domains: [], // Add any external image domains if needed
   }
 };
 
