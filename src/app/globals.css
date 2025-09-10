@@ -80,6 +80,30 @@ body {
     rgba(255, 255, 255, 0.05) 100%);
 }
 
+/* Mobile optimizations - reduced blur for better performance */
+@media (max-width: 768px) {
+  .glass {
+    backdrop-filter: blur(8px) saturate(150%);
+    -webkit-backdrop-filter: blur(8px) saturate(150%);
+    /* Stronger background on mobile for better readability */
+    background: rgba(255, 255, 255, 0.12);
+  }
+  
+  .glass-intense {
+    backdrop-filter: blur(12px) saturate(160%);
+    -webkit-backdrop-filter: blur(12px) saturate(160%);
+    /* Even stronger background for navigation */
+    background: rgba(255, 255, 255, 0.18);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+  }
+  
+  .glass-light {
+    backdrop-filter: blur(6px) saturate(140%);
+    -webkit-backdrop-filter: blur(6px) saturate(140%);
+    background: rgba(255, 255, 255, 0.08);
+  }
+}
+
 /* Fallback for browsers without backdrop-filter support */
 @supports not (backdrop-filter: blur(20px)) {
   .glass {
@@ -91,32 +115,69 @@ body {
 }
 
 /* Light mode glass adjustments */
+:root.light .glass {
+  background: rgba(255, 255, 255, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
+}
+
+:root.light .glass-intense {
+  background: rgba(255, 255, 255, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.15);
+}
+
+:root.light .glass-light {
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.08);
+}
+
+:root.light .glass-hover:hover {
+  background: rgba(255, 255, 255, 0.6);
+  border-color: rgba(255, 255, 255, 0.7);
+  box-shadow: 0 16px 48px 0 rgba(0, 0, 0, 0.2);
+}
+
+/* Mobile light mode optimizations */
+@media (max-width: 768px) {
+  :root.light .glass {
+    background: rgba(255, 255, 255, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.7);
+  }
+  
+  :root.light .glass-intense {
+    background: rgba(255, 255, 255, 0.75);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.12);
+  }
+}
+
+/* System preference fallback */
 @media (prefers-color-scheme: light) {
-  .glass {
+  :root:not(.dark) .glass {
     background: rgba(255, 255, 255, 0.4);
     border: 1px solid rgba(255, 255, 255, 0.5);
     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
-    color: var(--foreground);
   }
   
-  .glass-intense {
+  :root:not(.dark) .glass-intense {
     background: rgba(255, 255, 255, 0.5);
     border: 1px solid rgba(255, 255, 255, 0.6);
     box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.15);
-    color: var(--foreground);
   }
   
-  .glass-light {
-    background: rgba(255, 255, 255, 0.2);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.08);
-    color: var(--foreground);
-  }
-  
-  .glass-hover:hover {
-    background: rgba(255, 255, 255, 0.6);
-    border-color: rgba(255, 255, 255, 0.7);
-    box-shadow: 0 16px 48px 0 rgba(0, 0, 0, 0.2);
+  @media (max-width: 768px) {
+    :root:not(.dark) .glass {
+      background: rgba(255, 255, 255, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.7);
+    }
+    
+    :root:not(.dark) .glass-intense {
+      background: rgba(255, 255, 255, 0.75);
+      border: 1px solid rgba(255, 255, 255, 0.8);
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.12);
+    }
   }
 }
 
@@ -135,10 +196,10 @@ body {
 
 @supports not (backdrop-filter: blur(30px)) {
   .glass-intense {
-    background: rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.22);
     background-image: linear-gradient(135deg, 
-      rgba(255, 255, 255, 0.25) 0%, 
-      rgba(255, 255, 255, 0.15) 100%);
+      rgba(255, 255, 255, 0.28) 0%, 
+      rgba(255, 255, 255, 0.18) 100%);
   }
 }
 
