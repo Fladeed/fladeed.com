@@ -20,7 +20,7 @@ export const ServicesSection: React.FC = () => {
     {
       icon: '🎨',
       title: 'UI/UX Design',
-      description: 'Beautiful, intuitive designs that captivate users and drive engagement with fluid glass aesthetics.',
+      description: 'Beautiful, intuitive designs that captivate users and drive engagement with modern aesthetics.',
       features: ['Glass Morphism', 'User Research', 'Prototyping', 'Design Systems']
     },
     {

@@ -20,7 +20,7 @@ export const HeroSection: React.FC = () => {
           </h1>
           
           <p className="text-xl md:text-2xl text-white/80 mb-8 max-w-3xl mx-auto leading-relaxed">
-            We craft exceptional digital experiences with cutting-edge technology and fluid glass design. 
+            We craft exceptional digital experiences with cutting-edge technology and modern design. 
             Transform your ideas into stunning, performance-driven applications.
           </p>
           

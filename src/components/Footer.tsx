@@ -48,7 +48,7 @@ export const Footer: React.FC = () => {
                 <span className="text-white font-bold text-xl gradient-text">Fladeed</span>
               </div>
               <p className="text-white/70 leading-relaxed mb-6 max-w-md">
-                Crafting exceptional digital experiences with cutting-edge technology and fluid glass design. 
+                Crafting exceptional digital experiences with cutting-edge technology and modern design. 
                 Transform your ideas into stunning, performance-driven applications.
               </p>
               

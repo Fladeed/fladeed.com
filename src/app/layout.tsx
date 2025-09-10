@@ -8,11 +8,16 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Fladeed - Premium Dev Agency with Fluid Glass Design",
-  description: "Transform your ideas into stunning, performance-driven applications with Fladeed's cutting-edge development services and fluid glass design.",
+  title: "Fladeed - Premium Development Agency",
+  description: "Transform your ideas into stunning, performance-driven applications with Fladeed's cutting-edge development services.",
   keywords: "web development, mobile apps, UI/UX design, Next.js, React, TypeScript, glass morphism",
   authors: [{ name: "Fladeed Dev Agency" }],
   viewport: "width=device-width, initial-scale=1",
+  icons: {
+    icon: "/logo-simple.svg",
+    shortcut: "/logo-simple.svg",
+    apple: "/logo-simple.svg",
+  },
 };
 
 export default function RootLayout({
