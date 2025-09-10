@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import Image from 'next/image';
 import { GlassCard } from './GlassCard';
 import { GlassButton } from './GlassButton';
 
@@ -21,8 +22,14 @@ export const GlassNavigation: React.FC = () => {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <div className="flex items-center space-x-2">
-            <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold text-lg">F</span>
+            <div className="w-8 h-8 relative">
+              <Image
+                src="/logo-simple.svg"
+                alt="Fladeed logo"
+                width={32}
+                height={32}
+                className="object-contain"
+              />
             </div>
             <span className="text-white font-bold text-xl gradient-text">Fladeed</span>
           </div>
