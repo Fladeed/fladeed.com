@@ -29,19 +29,19 @@ export const ContactSection: React.FC = () => {
     {
       icon: '📧',
       title: 'Email',
-      value: 'hello@fladeed.com',
-      href: 'mailto:hello@fladeed.com'
+      value: 'contact@fladeed.com',
+      href: 'mailto:contact@fladeed.com'
     },
     {
       icon: '📱',
       title: 'Phone',
-      value: '+1 (555) 123-4567',
-      href: 'tel:+15551234567'
+      value: '+212 521-168411',
+      href: 'tel:+212521168411'
     },
     {
       icon: '📍',
       title: 'Location',
-      value: 'San Francisco, CA',
+      value: 'Casablanca, Morocco',
       href: '#'
     }
   ];

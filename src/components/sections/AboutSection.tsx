@@ -6,22 +6,22 @@ import { GlassCard } from '../GlassCard';
 export const AboutSection: React.FC = () => {
   const team = [
     {
-      name: 'Alex Johnson',
-      role: 'Lead Developer',
-      expertise: 'Full-Stack Development',
+      name: 'Hamza Ben Yazid',
+      role: 'Frontend & UI/UX Specialist | SRE & DevOps',
+      expertise: 'React, mobile, user-centered design, CI/CD pipelines',
+      avatar: '👨‍🎨'
+    },
+    {
+      name: 'Mimoun Ghordou',
+      role: 'Backend & SRE Specialist',
+      expertise: 'Scalable systems, reliability engineering, automation',
       avatar: '👨‍💻'
     },
     {
-      name: 'Sarah Chen',
-      role: 'UI/UX Designer',
-      expertise: 'Design Systems',
-      avatar: '👩‍🎨'
-    },
-    {
-      name: 'Mike Rodriguez',
-      role: 'DevOps Engineer',
-      expertise: 'Cloud Architecture',
-      avatar: '👨‍🔧'
+      name: 'Mohammed Bekraoui',
+      role: 'Backend & Database Specialist',
+      expertise: 'Data modeling, optimization, PostgreSQL, SQL/NoSQL',
+      avatar: '👨‍💼'
     }
   ];
 
