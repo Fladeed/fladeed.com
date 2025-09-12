@@ -83,7 +83,7 @@ const AutomatedTestGeneratorProject: React.FC = () => {
     }
   };
 
-  return <ProjectDetailPage projectData={projectData} slug="automated-test-generator" />;
+  return <ProjectDetailPage projectData={projectData} />;
 };
 
 export default AutomatedTestGeneratorProject;

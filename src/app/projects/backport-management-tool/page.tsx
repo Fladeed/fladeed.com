@@ -83,7 +83,7 @@ const BackportManagementProject: React.FC = () => {
     }
   };
 
-  return <ProjectDetailPage projectData={projectData} slug="backport-management-tool" />;
+  return <ProjectDetailPage projectData={projectData} />;
 };
 
 export default BackportManagementProject;

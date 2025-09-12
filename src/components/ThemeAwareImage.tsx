@@ -75,5 +75,5 @@ export const ThemeAwareImage: React.FC<ThemeAwareImageProps> = ({
     ...(fill ? { fill: true } : { width, height })
   };
 
-  return <Image {...imageProps} />;
+  return <Image {...imageProps} alt={alt} />;
 };

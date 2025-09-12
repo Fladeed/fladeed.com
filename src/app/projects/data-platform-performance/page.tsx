@@ -66,7 +66,7 @@ const DataPlatformPerformanceProject: React.FC = () => {
     }
   };
 
-  return <ProjectDetailPage projectData={projectData} slug="data-platform-performance" />;
+  return <ProjectDetailPage projectData={projectData} />;
 };
 
 export default DataPlatformPerformanceProject;

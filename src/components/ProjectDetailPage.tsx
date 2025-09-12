@@ -1,7 +1,6 @@
 'use client';
 
 import React from 'react';
-import Image from 'next/image';
 import Link from 'next/link';
 import { GlassCard } from './GlassCard';
 import { GlassButton } from './GlassButton';
@@ -52,10 +51,9 @@ interface ProjectData {
 
 interface ProjectDetailPageProps {
   projectData: ProjectData;
-  slug: string;
 }
 
-export const ProjectDetailPage: React.FC<ProjectDetailPageProps> = ({ projectData, slug }) => {
+export const ProjectDetailPage: React.FC<ProjectDetailPageProps> = ({ projectData }) => {
   const {
     category,
     title,

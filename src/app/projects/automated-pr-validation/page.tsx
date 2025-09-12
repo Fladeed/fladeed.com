@@ -84,7 +84,7 @@ const AutomatedPRValidationProject: React.FC = () => {
     }
   };
 
-  return <ProjectDetailPage projectData={projectData} slug="automated-pr-validation" />;
+  return <ProjectDetailPage projectData={projectData} />;
 };
 
 export default AutomatedPRValidationProject;
