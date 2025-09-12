@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { GlassCard } from '../GlassCard';
 import { GlassButton } from '../GlassButton';
+import { ThemeAwareImage } from '../ThemeAwareImage';
 
 interface Project {
   title: string;
@@ -21,7 +22,7 @@ const ProjectCard: React.FC<{ project: Project }> = ({ project }) => (
       <div className="mb-4 group-hover:scale-110 transition-transform duration-300 flex items-center justify-center h-16">
         {project.image.startsWith('/') ? (
           <div className="w-16 h-16 relative">
-            <Image 
+            <ThemeAwareImage 
               src={project.image} 
               alt={project.title}
               fill

@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { GlassCard } from './GlassCard';
 import { GlassButton } from './GlassButton';
 import { ParticleBackground } from './ParticleBackground';
+import { ThemeAwareImage } from './ThemeAwareImage';
 
 interface ProjectData {
   // Header data
@@ -110,7 +111,7 @@ export const ProjectDetailPage: React.FC<ProjectDetailPageProps> = ({ projectDat
             <GlassCard variant="default" className="overflow-hidden">
               {heroImage.src.startsWith('/') ? (
                 <div className="relative w-full h-96 md:h-[600px]">
-                  <Image
+                  <ThemeAwareImage
                     src={heroImage.src}
                     alt={heroImage.alt}
                     fill
