@@ -71,7 +71,7 @@ export const AboutSection: React.FC = () => {
           <GlassCard variant="default" animated>
             <h3 className="text-2xl font-bold text-adaptive mb-4">Our Story</h3>
             <p className="text-adaptive-muted leading-relaxed mb-4">
-              Founded in 2019, Fladeed started with a simple mission: to bridge the gap between 
+              Founded in 2024, Fladeed started with a simple mission: to bridge the gap between 
               stunning design and exceptional functionality. We believe that great software should 
               be both powerful and beautiful.
             </p>
