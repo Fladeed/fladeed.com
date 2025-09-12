@@ -11,6 +11,7 @@ interface GlassButtonProps {
   href?: string;
   shimmer?: boolean;
   glow?: boolean;
+  disabled?: boolean;
 }
 
 export const GlassButton: React.FC<GlassButtonProps> = ({
@@ -22,6 +23,7 @@ export const GlassButton: React.FC<GlassButtonProps> = ({
   href,
   shimmer = false,
   glow = false,
+  disabled = false,
 }) => {
   const baseClasses = 'glass glass-hover font-medium transition-all duration-300 border-0 cursor-pointer inline-flex items-center justify-center';
   
@@ -37,9 +39,11 @@ export const GlassButton: React.FC<GlassButtonProps> = ({
     ghost: 'bg-transparent text-adaptive border border-adaptive-muted',
   };
   
+  const disabledClasses = disabled ? 'opacity-50 cursor-not-allowed' : '';
+  
   const effectClasses = `
-    ${shimmer ? 'shimmer' : ''}
-    ${glow ? 'pulse-glow' : ''}
+    ${shimmer && !disabled ? 'shimmer' : ''}
+    ${glow && !disabled ? 'pulse-glow' : ''}
   `.trim();
   
   const combinedClasses = `
@@ -47,6 +51,7 @@ export const GlassButton: React.FC<GlassButtonProps> = ({
     ${sizeClasses[size]}
     ${variantClasses[variant]}
     ${effectClasses}
+    ${disabledClasses}
     ${className}
   `.trim();
 
@@ -73,7 +78,12 @@ export const GlassButton: React.FC<GlassButtonProps> = ({
   }
 
   return (
-    <button onClick={onClick} className={combinedClasses} style={inlineStyles}>
+    <button 
+      onClick={disabled ? undefined : onClick} 
+      className={combinedClasses} 
+      style={inlineStyles}
+      disabled={disabled}
+    >
       {content}
     </button>
   );
