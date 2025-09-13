@@ -11,7 +11,7 @@ const DataPlatformPerformanceProject: React.FC = () => {
     description: 'Optimized a large-scale data platform experiencing performance and reliability challenges, delivering faster processing, efficient API operations, and stronger transaction handling.',
     
     heroImage: {
-      src: '/data-platform-performance.png',
+      src: '/data-platform-performance-*.png',
       alt: 'Data Platform Performance Enhancement'
     },
     

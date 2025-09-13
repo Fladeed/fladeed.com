@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { useTheme } from '../contexts/ThemeContext';
 
 interface ThemeAwareImageProps {
-  src: string; // Base image path (without extension)
+  src: string; // Image path - if exact name (name.png), use as-is. If wildcard pattern (name-*.png), choose based on theme
   alt: string;
   fill?: boolean;
   className?: string;
@@ -27,26 +27,21 @@ export const ThemeAwareImage: React.FC<ThemeAwareImageProps> = ({
   
   // Helper function to get the appropriate image source based on theme
   const getImageSrc = (baseSrc: string, theme: 'light' | 'dark') => {
-    // If it's already a path starting with /, handle it
-    if (baseSrc.startsWith('/')) {
-      const pathWithoutExtension = baseSrc.replace(/\.(png|jpg|jpeg)$/, '');
-      const extension = baseSrc.match(/\.(png|jpg|jpeg)$/)?.[0] || '.png';
-      
+    // Check if this is a wildcard pattern (contains -* in the name)
+    const isWildcardPattern = baseSrc.includes('-*');
+    
+    if (isWildcardPattern) {
+      // Handle wildcard pattern: name-*.png
+      // Replace -* with appropriate suffix based on theme
       if (theme === 'dark') {
-        // Try dark version first, fallback to original if dark doesn't exist
-        const darkSrc = `${pathWithoutExtension}-dark${extension}`;
-        // Return dark version, but we'll handle fallback in the Image component's onError
-        return darkSrc;
+        return baseSrc.replace('-*', '-dark');
+      } else {
+        return baseSrc.replace('-*', '');
       }
+    } else {
+      // Exact image name provided - use as-is regardless of theme
       return baseSrc;
     }
-    
-    // If it's just a filename
-    const [name, extension] = baseSrc.split('.');
-    if (theme === 'dark') {
-      return `/${name}-dark.${extension}`;
-    }
-    return `/${name}.${extension}`;
   };
 
   const [imageSrc, setImageSrc] = React.useState(() => getImageSrc(src, resolvedTheme));
@@ -58,11 +53,12 @@ export const ThemeAwareImage: React.FC<ThemeAwareImageProps> = ({
     setHasError(false);
   }, [src, resolvedTheme]);
 
-  // Handle image load error (fallback to original image)
+  // Handle image load error (fallback to original image for wildcard patterns)
   const handleImageError = () => {
-    if (!hasError && resolvedTheme === 'dark') {
+    if (!hasError && src.includes('-*') && resolvedTheme === 'dark') {
       setHasError(true);
-      setImageSrc(src); // Fallback to original image
+      // Fallback to light version if dark version fails to load
+      setImageSrc(src.replace('-*', ''));
     }
   };
 

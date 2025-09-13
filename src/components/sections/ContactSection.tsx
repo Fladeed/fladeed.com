@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { GlassCard } from '../GlassCard';
 import { GlassButton } from '../GlassButton';
+import { openEmailClient, openPhoneDialer } from '@/utils/navigation';
 
 export const ContactSection: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -28,10 +29,22 @@ export const ContactSection: React.FC = () => {
         body: JSON.stringify(formData),
       });
 
+      const result = await response.json();
+
       if (response.ok) {
         setSubmitStatus('success');
         setFormData({ name: '', email: '', company: '', message: '' });
       } else {
+        // If it's a configuration error, show a more helpful message
+        if (result.error?.includes('No email service configured')) {
+          // Fallback: open default email client
+          const subject = `Project Inquiry from ${formData.name}`;
+          const body = `Name: ${formData.name}\nEmail: ${formData.email}\nCompany: ${formData.company || 'Not provided'}\n\nMessage:\n${formData.message}`;
+          openEmailClient('contact@fladeed.com', subject, body);
+          setSubmitStatus('success');
+          setFormData({ name: '', email: '', company: '', message: '' });
+          return;
+        }
         setSubmitStatus('error');
       }
     } catch (error) {
@@ -54,19 +67,19 @@ export const ContactSection: React.FC = () => {
       icon: '📧',
       title: 'Email',
       value: 'contact@fladeed.com',
-      href: 'mailto:contact@fladeed.com'
+      action: () => openEmailClient('contact@fladeed.com', 'Project Inquiry from Website')
     },
     {
       icon: '📱',
       title: 'Phone',
       value: '+212 521-168411',
-      href: 'tel:+212521168411'
+      action: () => openPhoneDialer('+212521168411')
     },
     {
       icon: '📍',
       title: 'Location',
       value: 'Casablanca, Morocco',
-      href: '#'
+      action: () => window.open('https://maps.google.com/?q=Casablanca,Morocco', '_blank')
     }
   ];
 
@@ -161,7 +174,14 @@ export const ContactSection: React.FC = () => {
                 className="w-full"
                 disabled={isSubmitting}
               >
-                {isSubmitting ? 'Sending...' : 'Send Message'}
+                {isSubmitting ? (
+                  <div className="flex items-center space-x-2">
+                    <div className="w-4 h-4 border-2 border-current border-t-transparent rounded-full animate-spin"></div>
+                    <span>Sending...</span>
+                  </div>
+                ) : (
+                  'Send Message'
+                )}
               </GlassButton>
 
               {/* Status Messages */}
@@ -175,9 +195,23 @@ export const ContactSection: React.FC = () => {
               
               {submitStatus === 'error' && (
                 <div className="p-4 bg-red-500/10 border border-red-500/20 rounded-lg">
-                  <p className="text-red-400 text-sm">
-                    ❌ Failed to send message. Please try again or contact us directly.
+                  <p className="text-red-400 text-sm mb-2">
+                    ❌ Failed to send message. Please try one of these alternatives:
                   </p>
+                  <div className="space-y-1 text-xs text-red-300">
+                    <button 
+                      onClick={() => openEmailClient('contact@fladeed.com', 'Project Inquiry from Website')}
+                      className="block hover:text-red-200 underline cursor-pointer"
+                    >
+                      • Send email directly to contact@fladeed.com
+                    </button>
+                    <button 
+                      onClick={() => openPhoneDialer('+212521168411')}
+                      className="block hover:text-red-200 underline cursor-pointer"
+                    >
+                      • Call us at +212 521-168411
+                    </button>
+                  </div>
                 </div>
               )}
             </form>
@@ -194,10 +228,10 @@ export const ContactSection: React.FC = () => {
               
               <div className="space-y-4">
                 {contactInfo.map((info, index) => (
-                  <a
+                  <button
                     key={index}
-                    href={info.href}
-                    className="flex items-center space-x-4 p-4 glass-light rounded-lg hover:glass-hover transition-all duration-300 group"
+                    onClick={info.action}
+                    className="flex items-center space-x-4 p-4 glass-light rounded-lg hover:glass-hover transition-all duration-300 group w-full text-left cursor-pointer"
                   >
                     <div className="text-2xl">{info.icon}</div>
                     <div>
@@ -206,7 +240,7 @@ export const ContactSection: React.FC = () => {
                         {info.value}
                       </div>
                     </div>
-                  </a>
+                  </button>
                 ))}
               </div>
             </GlassCard>

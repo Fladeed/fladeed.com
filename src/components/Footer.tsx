@@ -3,36 +3,37 @@
 import React from 'react';
 import Image from 'next/image';
 import { GlassCard } from './GlassCard';
+import { openExternalLink, openEmailClient, scrollToSection } from '@/utils/navigation';
 
 export const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
 
   const footerLinks = {
     Services: [
-      'Web Development',
-      'Mobile Apps',
-      'UI/UX Design',
-      'Cloud Solutions'
+      { name: 'Web Development', action: () => scrollToSection('services') },
+      { name: 'Mobile Apps', action: () => scrollToSection('services') },
+      { name: 'UI/UX Design', action: () => scrollToSection('services') },
+      { name: 'Cloud Solutions', action: () => scrollToSection('services') }
     ],
     Company: [
-      'About Us',
-      'Our Team',
-      'Careers',
-      'Contact'
+      { name: 'About Us', action: () => scrollToSection('about') },
+      { name: 'Our Team', action: () => scrollToSection('about') },
+      { name: 'Portfolio', action: () => scrollToSection('portfolio') },
+      { name: 'Contact', action: () => scrollToSection('contact') }
     ],
     Resources: [
-      'Blog',
-      'Case Studies',
-      'Documentation',
-      'Support'
+      { name: 'Projects', action: () => scrollToSection('portfolio') },
+      { name: 'Case Studies', action: () => scrollToSection('portfolio') },
+      { name: 'Get Quote', action: () => scrollToSection('contact') },
+      { name: 'Support', action: () => openEmailClient('contact@fladeed.com', 'Support Request') }
     ]
   };
 
   const socialLinks = [
-    { name: 'Twitter', icon: '🐦', href: '#' },
-    { name: 'LinkedIn', icon: '💼', href: '#' },
-    { name: 'GitHub', icon: '🐱', href: '#' },
-    { name: 'Dribbble', icon: '🏀', href: '#' }
+    { name: 'LinkedIn', icon: '💼', href: 'https://linkedin.com/company/fladeed' },
+    { name: 'GitHub', icon: '🐙', href: 'https://github.com/fladeed' },
+    { name: 'Email', icon: '📧', href: 'mailto:contact@fladeed.com' },
+    { name: 'Phone', icon: '📱', href: 'tel:+212521168411' }
   ];
 
   return (
@@ -55,21 +56,30 @@ export const Footer: React.FC = () => {
                 <span className="text-adaptive font-bold text-xl">Fladeed</span>
               </div>
               <p className="text-adaptive-muted leading-relaxed mb-6 max-w-md">
-                Crafting exceptional digital experiences with cutting-edge technology and modern design. 
+                Crafting exceptional digital experiences with cutting-edge technology and modern design.
                 Transform your ideas into stunning, performance-driven applications.
               </p>
-              
+
               {/* Social Links */}
               <div className="flex space-x-3">
                 {socialLinks.map((social, index) => (
-                  <a
+                  <button
                     key={index}
-                    href={social.href}
-                    className="w-10 h-10 glass rounded-lg flex items-center justify-center hover:glass-hover transition-all duration-300"
+                    onClick={() => {
+                      if (social.href.startsWith('mailto:')) {
+                        openEmailClient(social.href.replace('mailto:', ''), 'Hello from Fladeed Website');
+                      } else if (social.href.startsWith('tel:')) {
+                        window.location.href = social.href;
+                      } else {
+                        openExternalLink(social.href);
+                      }
+                    }}
+                    className="w-10 h-10 glass rounded-lg flex items-center justify-center hover:glass-hover transition-all duration-300 cursor-pointer"
                     title={social.name}
+                    aria-label={`Visit our ${social.name}`}
                   >
                     <span className="text-lg">{social.icon}</span>
-                  </a>
+                  </button>
                 ))}
               </div>
             </div>
@@ -81,12 +91,12 @@ export const Footer: React.FC = () => {
                 <ul className="space-y-3">
                   {links.map((link, index) => (
                     <li key={index}>
-                      <a
-                        href="#"
-                        className="text-adaptive-muted hover:text-adaptive transition-colors duration-300 text-sm"
+                      <button
+                        onClick={link.action}
+                        className="text-adaptive-muted hover:text-adaptive transition-colors duration-300 text-sm text-left cursor-pointer"
                       >
-                        {link}
-                      </a>
+                        {link.name}
+                      </button>
                     </li>
                   ))}
                 </ul>
@@ -99,7 +109,7 @@ export const Footer: React.FC = () => {
             <p className="text-adaptive-muted text-sm mb-4 md:mb-0">
               © {currentYear} Fladeed. All rights reserved.
             </p>
-            
+
             <div className="flex items-center space-x-6 text-sm">
               <a href="#" className="text-adaptive-muted hover:text-adaptive transition-colors">
                 Privacy Policy

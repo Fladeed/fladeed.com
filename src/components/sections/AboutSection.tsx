@@ -76,8 +76,9 @@ export const AboutSection: React.FC = () => {
               be both powerful and beautiful.
             </p>
             <p className="text-adaptive-muted leading-relaxed">
-              Today, we&apos;re proud to have delivered over 50 successful projects, helping businesses 
-              of all sizes achieve their digital goals with cutting-edge technology and innovative design.
+              Today, we&apos;re proud to have delivered innovative projects, helping businesses 
+              of all sizes achieve their digital goals with cutting-edge technology and modern design 
+              principles that prioritize both functionality and user experience.
             </p>
           </GlassCard>
 

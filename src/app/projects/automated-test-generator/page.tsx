@@ -11,7 +11,7 @@ const AutomatedTestGeneratorProject: React.FC = () => {
     description: 'Specialized tool that transforms UML sequence diagrams into executable tests using model-driven engineering, Eclipse Modeling Framework, and the Epsilon transformation framework to ensure complete test coverage.',
     
     heroImage: {
-      src: '/automated-test-generator-from-sequence-diagram.png',
+      src: '/automated-test-generator-from-sequence-diagram-*.png',
       alt: 'Automated Test Generator from Sequence Diagrams Dashboard'
     },
     

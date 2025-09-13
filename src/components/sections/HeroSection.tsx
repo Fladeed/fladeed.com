@@ -3,6 +3,7 @@
 import React from 'react';
 import { GlassCard } from '../GlassCard';
 import { GlassButton } from '../GlassButton';
+import { scrollToSection } from '@/utils/navigation';
 
 export const HeroSection: React.FC = () => {
   return (
@@ -14,19 +15,29 @@ export const HeroSection: React.FC = () => {
           </GlassCard>          <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
             <span className="gradient-text">Fladeed</span>
             <br />
-            <span className="text-adaptive">Dev Agency</span>
+            <span className="text-adaptive">Software Development Agency</span>
           </h1>
           
           <p className="text-xl md:text-2xl text-adaptive-muted mb-8 max-w-3xl mx-auto leading-relaxed">
-            We craft exceptional digital experiences with cutting-edge technology and fluid glass design. 
-            Transform your ideas into stunning, performance-driven applications.
+            Full-stack software development experts creating comprehensive solutions worldwide. 
+            We build web applications, mobile apps, desktop software, and cloud systems using cutting-edge technologies.
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <GlassButton size="lg" variant="primary" shimmer glow>
+            <GlassButton 
+              size="lg" 
+              variant="primary" 
+              shimmer 
+              glow
+              onClick={() => scrollToSection('contact')}
+            >
               Start Your Project
             </GlassButton>
-            <GlassButton size="lg" variant="ghost">
+            <GlassButton 
+              size="lg" 
+              variant="ghost"
+              onClick={() => scrollToSection('portfolio')}
+            >
               View Our Work
             </GlassButton>
           </div>
@@ -35,18 +46,18 @@ export const HeroSection: React.FC = () => {
         {/* Stats Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-16">
           <GlassCard variant="default" interactive className="text-center">
-            <div className="text-3xl font-bold gradient-text mb-2">15+</div>
+            <div className="text-3xl font-bold gradient-text mb-2">6+</div>
             <div className="text-adaptive-muted">Projects Delivered</div>
           </GlassCard>
           
           <GlassCard variant="default" interactive className="text-center">
-            <div className="text-3xl font-bold gradient-text mb-2">98%</div>
-            <div className="text-adaptive-muted">Client Satisfaction</div>
+            <div className="text-3xl font-bold gradient-text mb-2">3</div>
+            <div className="text-adaptive-muted">Expert Developers</div>
           </GlassCard>
           
           <GlassCard variant="default" interactive className="text-center">
-            <div className="text-3xl font-bold gradient-text mb-2">5+</div>
-            <div className="text-adaptive-muted">Years Experience</div>
+            <div className="text-3xl font-bold gradient-text mb-2">9+</div>
+            <div className="text-adaptive-muted">Years Collective Experience</div>
           </GlassCard>
         </div>
       </div>

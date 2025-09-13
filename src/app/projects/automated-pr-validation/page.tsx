@@ -11,7 +11,7 @@ const AutomatedPRValidationProject: React.FC = () => {
     description: 'Internal web-based application that integrates seamlessly with GitHub to perform automated validation checks, performance benchmarking, and provide real-time reporting dashboards for maintaining consistent quality standards.',
     
     heroImage: {
-      src: '/automatic-PR-validation.png',
+      src: '/automatic-PR-validation-*.png',
       alt: 'Automated PR Validation & Benchmarking Tool Dashboard'
     },
     

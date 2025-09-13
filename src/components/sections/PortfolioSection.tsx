@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { GlassCard } from '../GlassCard';
 import { GlassButton } from '../GlassButton';
 import { ThemeAwareImage } from '../ThemeAwareImage';
+import { scrollToSection, openExternalLink } from '@/utils/navigation';
 
 interface Project {
   title: string;
@@ -13,6 +14,8 @@ interface Project {
   image: string;
   category: string;
   slug?: string;
+  demoUrl?: string;
+  githubUrl?: string;
 }
 
 const ProjectCard: React.FC<{ project: Project }> = ({ project }) => (
@@ -21,8 +24,8 @@ const ProjectCard: React.FC<{ project: Project }> = ({ project }) => (
       <div className="mb-4 group-hover:scale-110 transition-transform duration-300 flex items-center justify-center h-16">
         {project.image.startsWith('/') ? (
           <div className="w-16 h-16 relative">
-            <ThemeAwareImage 
-              src={project.image} 
+            <ThemeAwareImage
+              src={project.image}
               alt={project.title}
               fill
               className="object-cover rounded-lg"
@@ -36,38 +39,57 @@ const ProjectCard: React.FC<{ project: Project }> = ({ project }) => (
         {project.category}
       </div>
     </div>
-    
+
     <h3 className="text-xl font-bold text-adaptive mb-3">{project.title}</h3>
     <p className="text-adaptive-muted mb-4 leading-relaxed text-sm">{project.description}</p>
-    
+
     <div className="flex flex-wrap gap-2 mb-4">
       {project.tech.map((tech: string, techIndex: number) => (
-        <span 
-          key={techIndex} 
+        <span
+          key={techIndex}
           className="text-xs bg-white/10 text-adaptive-muted px-2 py-1 rounded-lg"
         >
           {tech}
         </span>
       ))}
     </div>
-    
+
     <div className="flex space-x-2 mt-auto">
       {project.slug ? (
         <>
-          <GlassButton size="sm" variant="ghost" className="flex-1">
-            View Details
-          </GlassButton>
-          <GlassButton size="sm" variant="primary" className="flex-1">
-            Case Study
-          </GlassButton>
+          <Link href={`/projects/${project.slug}`} className="flex-1">
+            <GlassButton size="sm" variant="primary" className="w-full">
+              View Details
+            </GlassButton>
+          </Link>
+          {project.demoUrl && (
+            <GlassButton 
+              size="sm" 
+              variant="ghost" 
+              className="flex-1"
+              onClick={() => openExternalLink(project.demoUrl!)}
+            >
+              Live Demo
+            </GlassButton>
+          )}
         </>
       ) : (
         <>
-          <GlassButton size="sm" variant="ghost" className="flex-1">
-            View Details
+          <GlassButton 
+            size="sm" 
+            variant="ghost" 
+            className="flex-1"
+            onClick={() => scrollToSection('contact')}
+          >
+            Learn More
           </GlassButton>
-          <GlassButton size="sm" variant="primary" className="flex-1">
-            Live Demo
+          <GlassButton 
+            size="sm" 
+            variant="primary" 
+            className="flex-1"
+            onClick={() => project.demoUrl ? openExternalLink(project.demoUrl) : scrollToSection('contact')}
+          >
+            {project.demoUrl ? 'Live Demo' : 'Get Quote'}
           </GlassButton>
         </>
       )}
@@ -86,10 +108,19 @@ export const PortfolioSection: React.FC = () => {
       slug: 'backport-management-tool'
     },
     {
+      title: 'Landing Page for RS Ingénierie',
+      description: 'Professional, responsive landing page designed to modernize online presence and generate leads for an engineering company specializing in structural diagnostics.',
+      tech: ['HTML', 'CSS', 'JavaScript', 'Figma', 'SEO', 'Responsive Design'],
+      image: '/rs-ingenierie-landing-page.png',
+      category: 'Web Development',
+      slug: 'rs-ingenierie-landing-page',
+      demoUrl: 'https://rs-ingenierie.fr'
+    },
+    {
       title: 'Data Platform Performance Enhancement',
       description: 'Optimized large-scale data platform with query optimization, API migration, and database driver improvements for better performance and reliability.',
       tech: ['Java', 'Oracle Database', 'JDBC', 'SQL', 'C', 'Query Optimization'],
-      image: '/data-platform-performance.png',
+      image: '/data-platform-performance-*.png',
       category: 'Performance Optimization',
       slug: 'data-platform-performance'
     },
@@ -97,15 +128,23 @@ export const PortfolioSection: React.FC = () => {
       title: 'Automated PR Validation & Benchmarking Tool',
       description: 'Internal web application with GitHub integration for automated validation checks, performance benchmarking, and real-time reporting dashboards.',
       tech: ['Java', 'Spring Boot', 'React', 'PostgreSQL', 'Docker', 'GitHub API'],
-      image: '/automatic-PR-validation.png',
+      image: '/automatic-PR-validation-*.png',
       category: 'DevOps Automation',
       slug: 'automated-pr-validation'
+    },
+    {
+      title: 'Regression Metrics Dashboard for a Software Platform',
+      description: 'Comprehensive dashboard solution that automated test data collection and improved software test effectiveness by reducing build failures by 65%.',
+      tech: ['Oracle APEX', 'Java', 'Gradle', 'CI/CD', 'Oracle Database', 'Bash'],
+      image: '/regression-metrics-dashboard.png',
+      category: 'Software Development',
+      slug: 'regression-metrics-dashboard'
     },
     {
       title: 'Automated Test Generator from Sequence Diagrams',
       description: 'Specialized tool that transforms UML sequence diagrams into executable tests using model-driven engineering and Eclipse Modeling Framework.',
       tech: ['Java', 'Eclipse EMF', 'Epsilon', 'UML Diagrams', 'Next.js', 'Spring Boot'],
-      image: '/automated-test-generator-from-sequence-diagram.png',
+      image: '/automated-test-generator-from-sequence-diagram-*.png',
       category: 'Model-Driven Engineering',
       slug: 'automated-test-generator'
     }
@@ -118,11 +157,11 @@ export const PortfolioSection: React.FC = () => {
           <GlassCard variant="light" className="inline-block mb-6">
             <span className="text-adaptive-accent font-medium text-sm">Our Work</span>
           </GlassCard>
-          
+
           <h2 className="text-4xl md:text-5xl font-bold mb-6">
             Featured <span className="gradient-text">Projects</span>
           </h2>
-          
+
           <p className="text-xl text-adaptive-muted max-w-3xl mx-auto">
             Discover our latest projects showcasing cutting-edge technology and beautiful design principles.
           </p>
@@ -131,32 +170,25 @@ export const PortfolioSection: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
           {projects.map((project, index) => (
             <div key={index} className="h-full">
-              {project.slug ? (
-                <Link href={`/projects/${project.slug}`}>
-                  <GlassCard 
-                    variant="default" 
-                    interactive 
-                    className="h-full group cursor-pointer"
-                  >
-                    <ProjectCard project={project} />
-                  </GlassCard>
-                </Link>
-              ) : (
-                <GlassCard 
-                  variant="default" 
-                  interactive 
-                  className="h-full group cursor-pointer"
-                >
-                  <ProjectCard project={project} />
-                </GlassCard>
-              )}
+              <GlassCard
+                variant="default"
+                interactive
+                className="h-full group cursor-pointer"
+              >
+                <ProjectCard project={project} />
+              </GlassCard>
             </div>
           ))}
         </div>
 
         <div className="text-center">
-          <GlassButton size="lg" variant="primary" shimmer>
-            View All Projects
+          <GlassButton 
+            size="lg" 
+            variant="primary" 
+            shimmer
+            onClick={() => scrollToSection('contact')}
+          >
+            Discuss Your Project
           </GlassButton>
         </div>
       </div>

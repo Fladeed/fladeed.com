@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { GlassCard } from './GlassCard';
 import { GlassButton } from './GlassButton';
 import { ThemeToggle } from './ThemeToggle';
+import { scrollToSection } from '@/utils/navigation';
 
 export const GlassNavigation: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -51,7 +52,11 @@ export const GlassNavigation: React.FC = () => {
           {/* CTA Button */}
           <div className="hidden md:flex items-center space-x-3">
             <ThemeToggle />
-            <GlassButton variant="primary" shimmer>
+            <GlassButton 
+              variant="primary" 
+              shimmer
+              onClick={() => scrollToSection('contact')}
+            >
               Get Started
             </GlassButton>
           </div>
@@ -60,6 +65,8 @@ export const GlassNavigation: React.FC = () => {
           <button
             className="md:hidden text-adaptive p-2"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
+            aria-label={isMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
+            aria-expanded={isMenuOpen}
           >
             <svg
               className="w-6 h-6"
@@ -95,7 +102,12 @@ export const GlassNavigation: React.FC = () => {
               ))}
               <div className="flex items-center space-x-3 pt-2">
                 <ThemeToggle />
-                <GlassButton variant="primary" shimmer className="flex-1">
+                <GlassButton 
+                  variant="primary" 
+                  shimmer 
+                  className="flex-1"
+                  onClick={() => scrollToSection('contact')}
+                >
                   Get Started
                 </GlassButton>
               </div>
