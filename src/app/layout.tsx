@@ -3,6 +3,8 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from '../contexts/ThemeContext';
 import { StructuredData } from '../components/StructuredData';
+import { CookieConsentModal } from '../components/CookieConsentModal';
+import { GoogleAnalytics } from '../components/GoogleAnalytics';
 
 const inter = Inter({
   subsets: ["latin"],
@@ -190,8 +192,12 @@ export default function RootLayout({
       </head>
       <body className={`${inter.className} antialiased`} suppressHydrationWarning>
         <StructuredData />
+        {process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID && (
+          <GoogleAnalytics measurementId={process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID} />
+        )}
         <ThemeProvider>
           {children}
+          <CookieConsentModal />
         </ThemeProvider>
       </body>
     </html>
