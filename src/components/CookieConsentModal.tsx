@@ -68,7 +68,7 @@ export const CookieConsentModal: React.FC<CookieConsentModalProps> = ({
       
       {/* Modal */}
       <div className="fixed bottom-0 left-0 right-0 z-50 p-4 sm:bottom-4 sm:left-4 sm:right-auto sm:max-w-md">
-        <GlassCard variant="medium" className="p-6 space-y-4">
+        <GlassCard variant="default" className="p-6 space-y-4">
           <div className="flex items-start gap-3">
             <div className="text-2xl">🍪</div>
             <div className="flex-1">
@@ -77,7 +77,7 @@ export const CookieConsentModal: React.FC<CookieConsentModalProps> = ({
               </h3>
               <p className="text-sm text-adaptive-muted leading-relaxed">
                 We use cookies to enhance your browsing experience, analyze site traffic, 
-                and personalize content. By clicking "Accept All", you consent to our use of cookies.
+                and personalize content. By clicking &ldquo;Accept All&rdquo;, you consent to our use of cookies.
               </p>
             </div>
           </div>
@@ -105,7 +105,7 @@ export const CookieConsentModal: React.FC<CookieConsentModalProps> = ({
                   </GlassButton>
                   
                   <GlassButton
-                    variant="outline"
+                    variant="ghost"
                     size="sm"
                     onClick={() => setShowDetails(true)}
                     className="flex-1 justify-center"
