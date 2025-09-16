@@ -46,7 +46,7 @@ export const HeroSection: React.FC = () => {
         {/* Stats Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-16">
           <GlassCard variant="default" interactive className="text-center">
-            <div className="text-3xl font-bold gradient-text mb-2">6+</div>
+            <div className="text-3xl font-bold gradient-text mb-2">8+</div>
             <div className="text-adaptive-muted">Projects Delivered</div>
           </GlassCard>
           

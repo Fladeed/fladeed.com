@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import { GlassCard } from '../GlassCard';
 import { GlassButton } from '../GlassButton';
@@ -57,40 +57,48 @@ const ProjectCard: React.FC<{ project: Project }> = ({ project }) => (
     <div className="flex space-x-2 mt-auto">
       {project.slug ? (
         <>
-          <Link href={`/projects/${project.slug}`} className="flex-1">
-            <GlassButton size="sm" variant="primary" className="w-full">
-              View Details
-            </GlassButton>
-          </Link>
+          <div className="flex-1" onClick={(e) => e.stopPropagation()}>
+            <Link href={`/projects/${project.slug}`} className="block">
+              <GlassButton size="sm" variant="primary" className="w-full">
+                View Details
+              </GlassButton>
+            </Link>
+          </div>
           {project.demoUrl && (
-            <GlassButton 
-              size="sm" 
-              variant="ghost" 
-              className="flex-1"
-              onClick={() => openExternalLink(project.demoUrl!)}
-            >
-              Live Demo
-            </GlassButton>
+            <div className="flex-1" onClick={(e) => e.stopPropagation()}>
+              <GlassButton
+                size="sm"
+                variant="ghost"
+                className="w-full"
+                onClick={() => openExternalLink(project.demoUrl!)}
+              >
+                Live Demo
+              </GlassButton>
+            </div>
           )}
         </>
       ) : (
         <>
-          <GlassButton 
-            size="sm" 
-            variant="ghost" 
-            className="flex-1"
-            onClick={() => scrollToSection('contact')}
-          >
-            Learn More
-          </GlassButton>
-          <GlassButton 
-            size="sm" 
-            variant="primary" 
-            className="flex-1"
-            onClick={() => project.demoUrl ? openExternalLink(project.demoUrl) : scrollToSection('contact')}
-          >
-            {project.demoUrl ? 'Live Demo' : 'Get Quote'}
-          </GlassButton>
+          <div className="flex-1" onClick={(e) => e.stopPropagation()}>
+            <GlassButton
+              size="sm"
+              variant="ghost"
+              className="w-full"
+              onClick={() => scrollToSection('contact')}
+            >
+              Learn More
+            </GlassButton>
+          </div>
+          <div className="flex-1" onClick={(e) => e.stopPropagation()}>
+            <GlassButton
+              size="sm"
+              variant="primary"
+              className="w-full"
+              onClick={() => project.demoUrl ? openExternalLink(project.demoUrl) : scrollToSection('contact')}
+            >
+              {project.demoUrl ? 'Live Demo' : 'Get Quote'}
+            </GlassButton>
+          </div>
         </>
       )}
     </div>
@@ -98,6 +106,9 @@ const ProjectCard: React.FC<{ project: Project }> = ({ project }) => (
 );
 
 export const PortfolioSection: React.FC = () => {
+  const [showAll, setShowAll] = useState(false);
+  const INITIAL_PROJECTS_COUNT = 6;
+  
   const projects = [
     {
       title: 'Backport Management Tool',
@@ -117,6 +128,32 @@ export const PortfolioSection: React.FC = () => {
       demoUrl: 'https://rs-ingenierie.fr'
     },
     {
+      title: 'Live Variables Obsidian Plugin',
+      description: 'Open-source plugin with 5,000+ downloads that revolutionizes Obsidian note-taking with dynamic variables, smart queries, and real-time synchronization.',
+      tech: ['TypeScript', 'JavaScript', 'Obsidian API', 'CSS', 'Node.js'],
+      image: '🔗',
+      category: 'Open Source Plugin',
+      slug: 'live-variables-obsidian-plugin',
+      demoUrl: 'https://github.com/HamzaBenyazid/Live-variables#-demo',
+      githubUrl: 'https://github.com/HamzaBenyazid/Live-variables'
+    },
+    {
+      title: 'GitLab Enhancement Extension',
+      description: 'Custom Chrome extension with background processing and API integration that streamlined workflow for a specific development team.',
+      tech: ['JavaScript', 'Chrome APIs', 'GitLab API', 'Background Scripts', 'MVC Architecture'],
+      image: '🔧',
+      category: 'Browser Extension',
+      slug: 'gitlab-enhancement-extension'
+    },
+    {
+      title: 'Regression Metrics Dashboard for a Software Platform',
+      description: 'Comprehensive dashboard solution that automated test data collection and improved software test effectiveness by reducing build failures by 65%.',
+      tech: ['Oracle APEX', 'Java', 'Gradle', 'CI/CD', 'Oracle Database', 'Bash'],
+      image: '/regression-metrics-dashboard.png',
+      category: 'Software Development',
+      slug: 'regression-metrics-dashboard'
+    },
+    {
       title: 'Data Platform Performance Enhancement',
       description: 'Optimized large-scale data platform with query optimization, API migration, and database driver improvements for better performance and reliability.',
       tech: ['Java', 'Oracle Database', 'JDBC', 'SQL', 'C', 'Query Optimization'],
@@ -133,14 +170,6 @@ export const PortfolioSection: React.FC = () => {
       slug: 'automated-pr-validation'
     },
     {
-      title: 'Regression Metrics Dashboard for a Software Platform',
-      description: 'Comprehensive dashboard solution that automated test data collection and improved software test effectiveness by reducing build failures by 65%.',
-      tech: ['Oracle APEX', 'Java', 'Gradle', 'CI/CD', 'Oracle Database', 'Bash'],
-      image: '/regression-metrics-dashboard.png',
-      category: 'Software Development',
-      slug: 'regression-metrics-dashboard'
-    },
-    {
       title: 'Automated Test Generator from Sequence Diagrams',
       description: 'Specialized tool that transforms UML sequence diagrams into executable tests using model-driven engineering and Eclipse Modeling Framework.',
       tech: ['Java', 'Eclipse EMF', 'Epsilon', 'UML Diagrams', 'Next.js', 'Spring Boot'],
@@ -149,6 +178,9 @@ export const PortfolioSection: React.FC = () => {
       slug: 'automated-test-generator'
     }
   ];
+
+  const displayedProjects = showAll ? projects : projects.slice(0, INITIAL_PROJECTS_COUNT);
+  const hasMoreProjects = projects.length > INITIAL_PROJECTS_COUNT;
 
   return (
     <section id="portfolio" className="py-20 px-4">
@@ -168,23 +200,44 @@ export const PortfolioSection: React.FC = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-          {projects.map((project, index) => (
+          {displayedProjects.map((project, index) => (
             <div key={index} className="h-full">
-              <GlassCard
-                variant="default"
-                interactive
-                className="h-full group cursor-pointer"
+              <Link 
+                href={project.slug ? `/projects/${project.slug}` : '#contact'}
+                onClick={project.slug ? undefined : (e) => {
+                  e.preventDefault();
+                  scrollToSection('contact');
+                }}
+                className="block h-full"
               >
-                <ProjectCard project={project} />
-              </GlassCard>
+                <GlassCard
+                  variant="default"
+                  interactive
+                  className="h-full group cursor-pointer"
+                >
+                  <ProjectCard project={project} />
+                </GlassCard>
+              </Link>
             </div>
           ))}
         </div>
 
+        {hasMoreProjects && (
+          <div className="text-center mb-8">
+            <GlassButton
+              size="lg"
+              variant="secondary"
+              onClick={() => setShowAll(!showAll)}
+            >
+              {showAll ? 'Show Less' : `Show All Projects (${projects.length})`}
+            </GlassButton>
+          </div>
+        )}
+
         <div className="text-center">
-          <GlassButton 
-            size="lg" 
-            variant="primary" 
+          <GlassButton
+            size="lg"
+            variant="primary"
             shimmer
             onClick={() => scrollToSection('contact')}
           >

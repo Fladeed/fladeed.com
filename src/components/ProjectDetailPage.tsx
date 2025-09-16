@@ -224,7 +224,7 @@ export const ProjectDetailPage: React.FC<ProjectDetailPageProps> = ({ projectDat
               <h2 className="text-3xl font-bold mb-6">
                 {callToAction.titleGradientWord ? (
                   <>
-                    {callToAction.title.replace(callToAction.titleGradientWord, '').trim()}{' '}
+                    {callToAction.title.replace(callToAction.titleGradientWord, '').replace('?', '').trim()}{' '}
                     <span className="gradient-text">{callToAction.titleGradientWord}</span>
                     {callToAction.title.includes('?') ? '?' : ''}
                   </>
